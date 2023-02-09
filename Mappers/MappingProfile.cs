@@ -10,6 +10,8 @@ namespace LibreriaVirtualApi.Mappers
         {
             CreateMap<BookRequestDto, Book>().ReverseMap();
             CreateMap<Book, BookResponseDto>().ReverseMap();
+            CreateMap<ShoppingCartRequestDto, ShoppingCar>().ReverseMap();
+            CreateMap<ShoppingCar, ShoppingCartResponseDto>();
         }
     }
 }
