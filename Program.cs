@@ -1,6 +1,7 @@
 using LibreriaVirtualApi.Data;
 using LibreriaVirtualApi.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -14,6 +15,7 @@ builder.Services.AddDbContext<BibliotecaVirtualContext>(config =>
 {
     config.UseSqlServer(connectionString);
 });
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 var app = builder.Build();
