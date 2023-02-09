@@ -1,4 +1,6 @@
+using LibreriaVirtualApi.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace LibreriaVirtualApi.Controllers
 {
@@ -12,10 +14,12 @@ namespace LibreriaVirtualApi.Controllers
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly BibliotecaVirtualContext _repo;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, BibliotecaVirtualContext repo)
         {
             _logger = logger;
+            _repo = repo;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
@@ -29,5 +33,11 @@ namespace LibreriaVirtualApi.Controllers
             })
             .ToArray();
         }
+
+        [HttpGet("Test")]
+        public async Task<IActionResult> Test()
+        {
+            return Ok(await _repo.Users.ToListAsync());
+        } 
     }
 }
